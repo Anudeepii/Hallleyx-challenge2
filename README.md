@@ -206,7 +206,8 @@ Dashboard Updated
 
 ## Live Demo
 
-🌐 hallleyx-challenge2-anudeepiis-projects.vercel.app
+🚀 Live Demo: https://hallleyx-challenge2-anudeepiis-projects.vercel.app
+🎥 Demo Video: <your video link>
 
 
 ## Summary
