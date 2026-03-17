@@ -270,6 +270,7 @@ http://localhost:5173
 
 DashboardBuilder-main/
 │
+
 ├── public/          # Static assets
 
 ├── src/             # Application source code
