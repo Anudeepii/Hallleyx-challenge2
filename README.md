@@ -135,12 +135,19 @@ http://localhost:5173
 
 DashboardBuilder-main/
 │
+
 ├── public/
+
 ├── src/
+
 ├── index.html
+
 ├── package.json
+
 ├── vite.config.ts
+
 ├── tailwind.config.ts
+
 └── tsconfig.json
 
 ---
