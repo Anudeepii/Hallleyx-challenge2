@@ -270,11 +270,11 @@ http://localhost:5173
 
 DashboardBuilder-main/
 │
-├── public/
-├── src/
-├── index.html
-├── package.json
-├── vite.config.ts
+├── public/          # Static assets
+├── src/             # Application source code
+├── index.html       # Entry HTML file
+├── package.json     # Project dependencies
+├── vite.config.ts   # Vite configuration
 ├── tailwind.config.ts
 └── tsconfig.json
 
