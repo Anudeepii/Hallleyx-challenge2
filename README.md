@@ -1,75 +1,142 @@
 # Custom Dashboard Builder
 
-This project is a React + Vite dashboard builder with customer orders and widget configuration.
+## Overview
 
-## 🚀 Run locally
+The **Custom Dashboard Builder** enables users to create personalized dashboards using widgets such as **Charts, Tables, and KPI cards**.
 
-From the repository root:
+It integrates with the **Customer Orders module**, allowing real-time visualization of data through an interactive and responsive interface.
 
-```powershell
-cd "C:\Users\anuud\Downloads\DashboardBuilder-main"
-npm install
-npm run dev
+---
+
+## Key Features
+
+* Drag-and-drop dashboard layout
+* Multiple widget types (Charts, Tables, KPIs)
+* Real-time data integration with customer orders
+* Widget resizing and deletion
+* Save and load dashboard configurations
+* Responsive design for Desktop, Tablet, and Mobile
+
+---
+
+## Dashboard
+
+* The dashboard initially loads with **no widgets configured**
+* Users can click **“Configure Dashboard”** to build their layout
+* Saved dashboards are automatically loaded on revisit
+
+---
+
+## Dashboard Configuration
+
+Users can add widgets from the panel:
+
+### Charts
+
+* Bar Chart
+* Line Chart
+* Pie Chart
+* Area Chart
+* Scatter Plot
+
+### Tables
+
+* Table
+
+### KPIs
+
+* KPI Value
+
+### Capabilities
+
+* Drag and drop widgets onto the canvas
+* Resize widgets dynamically
+* Remove widgets
+* Save dashboard configuration
+
+---
+
+## Customer Orders Module
+
+* Create new customer orders with validation
+* Automatic total amount calculation
+* View orders in a structured table
+* Delete orders
+* Data is used for dashboard analytics
+
+---
+
+## Data Integration
+
+* Dashboard widgets dynamically use **Customer Orders data**
+* KPI cards display aggregated metrics (e.g., total revenue)
+* Charts provide insights into order trends and performance
+
+---
+
+## Additional Features
+
+* Date-based filtering:
+
+  * All Time
+  * Today
+  * Last 7 Days
+  * Last 30 Days
+  * Last 90 Days
+
+* Responsive grid layout:
+
+  * Desktop (12 columns)
+  * Tablet (8 columns)
+  * Mobile (4 columns)
+
+---
+
+## How to Run
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Open in browser:
+
+   ```
+   http://localhost:5173
+   ```
+
+---
+
+## Project Structure
+
+```
+DashboardBuilder-main/
+│
+├── public/          # Static assets
+├── src/             # Application source code
+├── index.html       # Entry HTML file
+├── package.json     # Project dependencies
+├── vite.config.ts   # Vite configuration
+├── tailwind.config.ts
+└── tsconfig.json
 ```
 
-Then open:
+---
 
-- `http://localhost:8080`
+## Summary
 
-## 📦 What is in this project
+This project delivers a **fully functional custom dashboard builder** with:
 
-- Customer Orders (create/edit/delete with validation)
-- Dashboard build flow (drag/drop widgets, widget settings, save configuration)
-- Persisted state using localStorage (orders + dashboard config)
-- Responsive dashboard grid (desktop/tablet/mobile)
+* Interactive widget-based layout
+* Real-time analytics from customer data
+* Persistent dashboard configurations
+* Responsive and modern UI
 
-## ✅ Feature checklist
-
-1. Customer Orders
-   - [x] Starts empty
-   - [x] Create order popup with required field validation
-   - [x] Quantity min 1 and total amount calculation
-   - [x] Edit and delete orders
-   - [x] Data persistence across refresh
-
-2. Dashboard
-   - [x] Starts empty by default
-   - [x] Configure Dashboard page with widget palette
-   - [x] Drag & drop widgets to canvas
-   - [x] Widget settings + resize + delete
-   - [x] Save configuration
-   - [x] Persisted state across refresh
-
-3. Additional
-   - [x] Date filter for dashboard data
-   - [x] Responsive behavior (12/8/4 columns)
-
-## 🧠 Notes for submission
-
-- If the app fails to start, ensure you are in the nested project folder:
-  `DashboardBuilder-main/DashboardBuilder-main`.
-- Run:
-  - `npm install`
-  - `npm run dev`
-- Open `http://localhost:8080`.
-
-## 📁 Important files
-
-- `src/pages/Dashboard.tsx`
-- `src/pages/DashboardConfig.tsx`
-- `src/pages/CustomerOrders.tsx`
-- `src/components/features/dashboard/CanvasGrid.tsx`
-- `src/components/features/dashboard/WidgetSettingsPanel.tsx`
-- `src/components/features/orders/OrderFormModal.tsx`
-- `src/stores/dashboardStore.ts`
-- `src/stores/orderStore.ts`
-
-## Built With
-
-- Vite
-- React
-- TypeScript
-- Zustand
-- Tailwind CSS
-- shadcn-ui
-
+Designed to provide a **scalable and user-friendly analytics experience**.
