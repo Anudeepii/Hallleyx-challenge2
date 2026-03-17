@@ -1,37 +1,61 @@
-# Custom Dashboard Builder
+# 🚀 Custom Dashboard Builder
 
-## Overview
-
-The **Custom Dashboard Builder** enables users to create personalized dashboards using widgets such as **Charts, Tables, and KPI cards**.
-
-It integrates with the **Customer Orders module**, allowing real-time visualization of data through an interactive and responsive interface.
+A fully interactive dashboard builder that allows users to create personalized dashboards using charts, tables, and KPI widgets with real-time data integration.
 
 ---
 
-## Key Features
+## 🌐 Live Demo
+
+🚀 https://hallleyx-challenge2-anudeepiis-projects.vercel.app
+
+🎥 Demo Video: https://drive.google.com/file/d/1Odn-FBf8bddd9ghkIRMjblkP_pki7ask/view?usp=drivesdk
+
+---
+
+## 💻 Tech Stack
+
+* **Frontend:** React (TypeScript), Vite, Tailwind CSS, shadcn/ui
+* **UI Libraries:** Radix UI, Lucide React, Framer Motion
+* **State Management:** Zustand, Redux Toolkit
+* **Data Handling:** Axios, React Query
+* **Forms & Validation:** React Hook Form, Zod
+* **Charts & Visualization:** Recharts, Chart.js
+* **Routing:** React Router DOM
+* **Backend Services:** Supabase
+* **Deployment:** Vercel
+
+---
+
+## 📌 Overview
+
+The Custom Dashboard Builder enables users to design dynamic dashboards by combining widgets such as Charts, Tables, and KPI cards.
+
+It integrates with the Customer Orders module, allowing real-time visualization of data through an intuitive and responsive interface.
+
+---
+
+## ✨ Key Features
 
 * Drag-and-drop dashboard layout
 * Multiple widget types (Charts, Tables, KPIs)
 * Real-time data integration with customer orders
 * Widget resizing and deletion
 * Save and load dashboard configurations
-* Responsive design for Desktop, Tablet, and Mobile
+* Fully responsive (Desktop, Tablet, Mobile)
 
 ---
 
-## Dashboard
+## 📊 Dashboard
 
-* The dashboard initially loads with **no widgets configured**
-* Users can click **“Configure Dashboard”** to build their layout
-* Saved dashboards are automatically loaded on revisit
+* Initially loads with no widgets configured
+* Users can click **“Configure Dashboard”** to build layouts
+* Saved dashboards are automatically restored
 
 ---
 
-## Dashboard Configuration
+## ⚙️ Dashboard Configuration
 
-Users can add widgets from the panel:
-
-### Charts
+### 📈 Charts
 
 * Bar Chart
 * Line Chart
@@ -39,97 +63,89 @@ Users can add widgets from the panel:
 * Area Chart
 * Scatter Plot
 
-### Tables
+### 📋 Tables
 
 * Table
 
-### KPIs
+### 📌 KPIs
 
 * KPI Value
 
-### Capabilities
+---
 
-* Drag and drop widgets onto the canvas
+## 🧩 Capabilities
+
+* Drag and drop widgets onto canvas
 * Resize widgets dynamically
 * Remove widgets
 * Save dashboard configuration
 
 ---
 
-## Customer Orders Module
+## 🧾 Customer Orders Module
 
-* Create new customer orders with validation
+* Create orders with validation (mandatory fields)
 * Automatic total amount calculation
 * View orders in a structured table
 * Delete orders
-* Data is used for dashboard analytics
+* Data feeds dashboard analytics
 
 ---
 
-## Data Integration
+## 🔄 Data Integration
 
-* Dashboard widgets dynamically use **Customer Orders data**
+* Dashboard widgets use real-time order data
 * KPI cards display aggregated metrics (e.g., total revenue)
-* Charts provide insights into order trends and performance
+* Charts visualize trends and performance insights
 
 ---
 
-## Additional Features
+## 📅 Additional Features
 
-* Date-based filtering:
+### Date Filtering
 
-  * All Time
-  * Today
-  * Last 7 Days
-  * Last 30 Days
-  * Last 90 Days
+* All Time
+* Today
+* Last 7 Days
+* Last 30 Days
+* Last 90 Days
 
-* Responsive grid layout:
+### Responsive Layout
 
-  * Desktop (12 columns)
-  * Tablet (8 columns)
-  * Mobile (4 columns)
-
----
-
-## How to Run
-
-1. Install dependencies:
-
-   ```bash
-   npm install
-   ```
-
-2. Start the development server:
-
-   ```bash
-   npm run dev
-   ```
-
-3. Open in browser:
-
-   ```
-   http://localhost:5173
-   ```
+* Desktop (12 columns)
+* Tablet (8 columns)
+* Mobile (4 columns)
 
 ---
 
-## Project Structure
+## ⚙️ How to Run Locally
 
+```bash
+npm install
+npm run dev
 ```
+
+Open in browser:
+
+http://localhost:5173
+
+---
+
+## 📁 Project Structure
+
 DashboardBuilder-main/
 │
-├── public/          # Static assets
-├── src/             # Application source code
-├── index.html       # Entry HTML file
-├── package.json     # Project dependencies
-├── vite.config.ts   # Vite configuration
+├── public/
+├── src/
+├── index.html
+├── package.json
+├── vite.config.ts
 ├── tailwind.config.ts
 └── tsconfig.json
-```
 
 ---
-## Sample Workflows
+
+## 🔁 Sample Workflows
 
 ### Workflow 1: Sales Performance Dashboard
 
@@ -141,7 +157,6 @@ DashboardBuilder-main/
 
 **Logic:**
 
-* Fetch data from customer orders
 * Aggregate total revenue
 * Group sales by product
 
@@ -158,12 +173,12 @@ DashboardBuilder-main/
 **Logic:**
 
 * Count total orders
-* Categorize by status (Pending, Completed)
+* Categorize by status
 * Display recent transactions
 
 ---
 
-## Execution Example
+## ▶️ Execution Example
 
 ### Sample Input
 
@@ -177,16 +192,15 @@ DashboardBuilder-main/
 
 ### Execution Flow
 
-1. Order is created via form
+1. Order is created
 2. Total amount is calculated
-3. Data stored in system
-4. Dashboard widgets fetch updated data
-5. KPI updates total revenue
-6. Charts reflect new values
+3. Data is stored
+4. Dashboard updates automatically
+5. KPIs and charts refresh
 
 ### Sample Output
 
-```text
+```
 Order Created Successfully
 Total Amount: $100
 Dashboard Updated
@@ -194,30 +208,13 @@ Dashboard Updated
 
 ---
 
-## Demo
+## 🎯 Summary
 
-* Create customer orders
-* Configure dashboard
-* Add widgets
-* Save layout
-* View analytics
-
----
-
-## Live Demo
-
-🚀 Live Demo: [hallleyx-challenge2-anudeepiis-projects.vercel.app](https://hallleyx-challenge2-anudeepiis-projects.vercel.app/dashboard)
-
-🎥 Demo Video: https://drive.google.com/file/d/1Odn-FBf8bddd9ghkIRMjblkP_pki7ask/view?usp=drivesdk
-
-
-## Summary
-
-This project delivers a **fully functional custom dashboard builder** with:
+This project delivers a complete Custom Dashboard Builder with:
 
 * Interactive widget-based layout
-* Real-time analytics from customer data
+* Real-time analytics from order data
 * Persistent dashboard configurations
-* Responsive and modern UI
+* Fully responsive modern UI
 
-Designed to provide a **scalable and user-friendly analytics experience**.
+Designed as a scalable and user-friendly analytics platform.
