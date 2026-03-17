@@ -206,7 +206,8 @@ Dashboard Updated
 
 ## Live Demo
 
-🚀 Live Demo: hallleyx-challenge2-anudeepiis-projects.vercel.app
+🚀 Live Demo: [hallleyx-challenge2-anudeepiis-projects.vercel.app](https://hallleyx-challenge2-anudeepiis-projects.vercel.app/dashboard)
+
 🎥 Demo Video: https://drive.google.com/file/d/1Odn-FBf8bddd9ghkIRMjblkP_pki7ask/view?usp=drivesdk
 
 
