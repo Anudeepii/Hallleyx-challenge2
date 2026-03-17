@@ -269,6 +269,7 @@ http://localhost:5173
 ## 📁 Project Structure
 
 DashboardBuilder-main/
+
 │
 
 ├── public/          # Static assets
