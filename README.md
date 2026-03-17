@@ -129,6 +129,85 @@ DashboardBuilder-main/
 ```
 
 ---
+## Sample Workflows
+
+### Workflow 1: Sales Performance Dashboard
+
+**Widgets Used:**
+
+* KPI: Total Revenue
+* Bar Chart: Product-wise sales
+* Table: Customer orders
+
+**Logic:**
+
+* Fetch data from customer orders
+* Aggregate total revenue
+* Group sales by product
+
+---
+
+### Workflow 2: Order Monitoring Dashboard
+
+**Widgets Used:**
+
+* KPI: Total Orders
+* Pie Chart: Order Status Distribution
+* Table: Recent Orders
+
+**Logic:**
+
+* Count total orders
+* Categorize by status (Pending, Completed)
+* Display recent transactions
+
+---
+
+## Execution Example
+
+### Sample Input
+
+```json
+{
+  "product": "Fiber Internet 300 Mbps",
+  "quantity": 2,
+  "unit_price": 50
+}
+```
+
+### Execution Flow
+
+1. Order is created via form
+2. Total amount is calculated
+3. Data stored in system
+4. Dashboard widgets fetch updated data
+5. KPI updates total revenue
+6. Charts reflect new values
+
+### Sample Output
+
+```text
+Order Created Successfully
+Total Amount: $100
+Dashboard Updated
+```
+
+---
+
+## Demo
+
+* Create customer orders
+* Configure dashboard
+* Add widgets
+* Save layout
+* View analytics
+
+---
+
+## Live Demo
+
+🌐 Add your deployed link here
+
 
 ## Summary
 
