@@ -24,27 +24,21 @@ export default function CanvasGrid({
     updateDraftLayouts,
     dateFilter,
   } = useDashboardStore();
-
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const { ref: gridRef, width: gridWidth } = useContainerWidth();
-
   const orders = useOrderStore((s) => s.orders);
   const filteredOrders = filterOrdersByDate(orders, dateFilter);
 
-  // ✅ HANDLE EXTERNAL DROP
   const handleExternalDrop = useCallback(
     (e: React.DragEvent) => {
       e.preventDefault();
       setIsDraggingOver(false);
-
       const widgetType = e.dataTransfer.getData('widgetType') as WidgetType;
       if (!widgetType) return;
-
       const maxY = (draftLayouts.lg || []).reduce(
         (m, item) => Math.max(m, item.y + item.h),
         0
       );
-
       addDraftWidget(widgetType, 0, maxY);
     },
     [addDraftWidget, draftLayouts.lg]
@@ -61,7 +55,6 @@ export default function CanvasGrid({
     setIsDraggingOver(false);
   }, []);
 
-  // ✅ SAVE LAYOUT CHANGES
   const handleLayoutChange = useCallback(
     (_currentLayout: any, allLayouts: any) => {
       updateDraftLayouts(allLayouts);
@@ -86,20 +79,18 @@ export default function CanvasGrid({
               Drag widgets here
             </p>
             <p className="text-sm text-muted-foreground">
-              Drop widgets from the palette to start building your dashboard
+              Drop widgets from the palette on the left to start building your
+              dashboard
             </p>
           </div>
         </div>
       ) : (
         <div className="p-2 sm:p-4 relative" ref={gridRef}>
-          
-          {/* 🔥 DRAG OVERLAY */}
           {isDraggingOver && (
             <div className="absolute inset-0 z-20 pointer-events-none bg-primary/5 border-2 border-dashed border-primary rounded-xl flex items-center justify-center text-primary font-medium">
               Drop widget to add to dashboard
             </div>
           )}
-
           <Responsive
             className="layout"
             width={gridWidth}
@@ -108,8 +99,7 @@ export default function CanvasGrid({
             cols={{ lg: 12, md: 8, sm: 4 }}
             rowHeight={60}
             isDraggable={true}
-            isResizable={true}   // ✅ ENABLE RESIZE
-            draggableHandle=".drag-handle"  // ✅ HANDLE ONLY
+            isResizable={false}
             onLayoutChange={handleLayoutChange}
             compactType="vertical"
             margin={[12, 12]}
@@ -117,47 +107,30 @@ export default function CanvasGrid({
           >
             {draftWidgets.map((widget) => (
               <div key={widget.id} className="group">
-
                 <div className="h-full bg-card rounded-lg border border-border shadow-sm overflow-hidden relative">
-
-                  {/* ✅ DRAG HANDLE */}
-                  <div className="drag-handle cursor-move flex items-center justify-between px-2 py-1 border-b bg-muted/40">
-
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <GripVertical className="size-3.5" />
-                      Drag
-                    </div>
-
-                    <div className="flex gap-1">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onOpenSettings(widget.id);
-                        }}
-                        className="p-1 rounded-md hover:bg-accent"
-                        aria-label="Widget settings"
-                      >
-                        <Settings className="size-3.5 text-muted-foreground" />
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onDeleteWidget(widget.id);
-                        }}
-                        className="p-1 rounded-md hover:bg-destructive/10"
-                        aria-label="Delete widget"
-                      >
-                        <Trash2 className="size-3.5 text-destructive" />
-                      </button>
-                    </div>
+                  <WidgetRenderer widget={widget} orders={filteredOrders} />
+                  <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onOpenSettings(widget.id);
+                      }}
+                      className="p-1.5 rounded-md bg-card/95 backdrop-blur-sm border border-border shadow-sm hover:bg-accent transition-colors"
+                      aria-label="Widget settings"
+                    >
+                      <Settings className="size-3.5 text-muted-foreground" />
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onDeleteWidget(widget.id);
+                      }}
+                      className="p-1.5 rounded-md bg-card/95 backdrop-blur-sm border border-border shadow-sm hover:bg-destructive/10 transition-colors"
+                      aria-label="Delete widget"
+                    >
+                      <Trash2 className="size-3.5 text-destructive" />
+                    </button>
                   </div>
-
-                  {/* ✅ WIDGET CONTENT */}
-                  <div className="h-[calc(100%-32px)]">
-                    <WidgetRenderer widget={widget} orders={filteredOrders} />
-                  </div>
-
                 </div>
               </div>
             ))}
