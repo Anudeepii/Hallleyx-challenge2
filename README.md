@@ -21,7 +21,6 @@ A fully interactive dashboard builder that allows users to create personalized d
 * **Forms & Validation:** React Hook Form, Zod
 * **Charts & Visualization:** Recharts, Chart.js
 * **Routing:** React Router DOM
-* **Backend Services:** Supabase
 * **Deployment:** Vercel
 
 ---
