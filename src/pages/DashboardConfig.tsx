@@ -1,115 +1,76 @@
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Save } from 'lucide-react';
-import { toast } from 'sonner';
-import { Button } from '@/components/ui/button';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+import { useEffect } from 'react';
+import { Responsive } from 'react-grid-layout';
 import { useDashboardStore } from '@/stores/dashboardStore';
-import WidgetPalette from '@/components/features/dashboard/WidgetPalette';
-import CanvasGrid from '@/components/features/dashboard/CanvasGrid';
-import WidgetSettingsPanel from '@/components/features/dashboard/WidgetSettingsPanel';
+import { useOrderStore } from '@/stores/orderStore';
+import { filterOrdersByDate } from '@/lib/computeWidgetData';
+import { useContainerWidth } from '@/hooks/useContainerWidth';
+import WidgetRenderer from '@/components/features/dashboard/WidgetRenderer';
 
-export default function DashboardConfig() {
+export default function Dashboard() {
   const {
-    draftWidgets,
-    initDraft,
-    removeDraftWidget,
-    saveConfiguration,
+    widgets,
+    layouts,
+    loadConfiguration,
+    dateFilter,
   } = useDashboardStore();
-  const navigate = useNavigate();
 
-  const [settingsWidgetId, setSettingsWidgetId] = useState<string | null>(null);
-  const [deletingWidgetId, setDeletingWidgetId] = useState<string | null>(null);
+  const { ref: gridRef, width: gridWidth } = useContainerWidth();
+  const orders = useOrderStore((s) => s.orders);
+
+  const filteredOrders = filterOrdersByDate(orders, dateFilter);
 
   useEffect(() => {
-    initDraft();
-  }, [initDraft]);
-
-  const handleSave = () => {
-    saveConfiguration();
-    toast.success('Dashboard configuration saved successfully');
-    navigate('/dashboard');
-  };
-
-  const handleConfirmDelete = () => {
-    if (deletingWidgetId) {
-      removeDraftWidget(deletingWidgetId);
-      if (settingsWidgetId === deletingWidgetId) {
-        setSettingsWidgetId(null);
-      }
-      setDeletingWidgetId(null);
-      toast.success('Widget removed');
-    }
-  };
+    loadConfiguration(); // ✅ Load saved dashboard
+  }, [loadConfiguration]);
 
   return (
-    <div className="flex flex-col h-[calc(100vh-3.5rem)] lg:h-screen">
-      <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-border bg-card shrink-0">
-        <div className="flex items-center gap-2">
-          <Link to="/dashboard">
-            <Button variant="ghost" size="icon" className="size-9">
-              <ArrowLeft className="size-4" />
-            </Button>
-          </Link>
-          <div>
-            <h1 className="text-base font-semibold text-foreground">
-              Configure Dashboard
-            </h1>
-            <p className="text-xs text-muted-foreground hidden sm:block">
-              {draftWidgets.length} widget{draftWidgets.length !== 1 ? 's' : ''} added
+    <div className="h-[calc(100vh-3.5rem)] lg:h-screen bg-muted/30">
+
+      {/* EMPTY STATE */}
+      {widgets.length === 0 ? (
+        <div className="flex items-center justify-center h-full p-8">
+          <div className="text-center border-2 border-dashed border-border rounded-xl p-12 max-w-md">
+            <p className="text-lg font-semibold mb-2">
+              No widgets configured
+            </p>
+            <p className="text-sm text-muted-foreground">
+              Go to dashboard settings and add widgets
             </p>
           </div>
         </div>
-        <Button onClick={handleSave} className="gap-2">
-          <Save className="size-4" />
-          Save Configuration
-        </Button>
-      </div>
+      ) : (
+        <div className="p-2 sm:p-4 h-full overflow-auto" ref={gridRef}>
 
-      <div className="flex flex-1 overflow-hidden">
-        <div className="hidden md:flex">
-          <WidgetPalette />
+          <Responsive
+            className="layout"
+            width={gridWidth}
+            layouts={layouts}
+            breakpoints={{ lg: 1024, md: 768, sm: 0 }}
+            cols={{ lg: 12, md: 8, sm: 4 }}
+            rowHeight={60}
+            isDraggable={false}   // ❌ No dragging in view mode
+            isResizable={false}   // ❌ No resizing in view mode
+            compactType="vertical"
+            margin={[12, 12]}
+            containerPadding={[0, 0]}
+          >
+            {widgets.map((widget) => (
+              <div key={widget.id}>
+                <div className="h-full bg-card rounded-lg border border-border shadow-sm overflow-hidden">
+                  
+                  {/* Widget Content */}
+                  <WidgetRenderer
+                    widget={widget}
+                    orders={filteredOrders}
+                  />
+
+                </div>
+              </div>
+            ))}
+          </Responsive>
+
         </div>
-        <CanvasGrid
-          onOpenSettings={setSettingsWidgetId}
-          onDeleteWidget={setDeletingWidgetId}
-        />
-      </div>
-
-      <WidgetSettingsPanel
-        widgetId={settingsWidgetId}
-        onClose={() => setSettingsWidgetId(null)}
-      />
-
-      <AlertDialog
-        open={!!deletingWidgetId}
-        onOpenChange={() => setDeletingWidgetId(null)}
-      >
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete Widget</AlertDialogTitle>
-            <AlertDialogDescription>
-              Are you sure you want to remove this widget from the dashboard?
-              This action cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmDelete}>
-              Delete
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      )}
     </div>
   );
 }
