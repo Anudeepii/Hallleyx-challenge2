@@ -229,5 +229,3 @@ Designed as a scalable and user-friendly analytics platform.
 
 
 ---
-
-iendly analytics platform.
