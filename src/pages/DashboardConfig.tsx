@@ -14,7 +14,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useDashboardStore } from '@/stores/dashboardStore';
-import { useOrderStore } from '@/stores/orderStore';
 import WidgetPalette from '@/components/features/dashboard/WidgetPalette';
 import CanvasGrid from '@/components/features/dashboard/CanvasGrid';
 import WidgetSettingsPanel from '@/components/features/dashboard/WidgetSettingsPanel';
@@ -26,7 +25,6 @@ export default function DashboardConfig() {
     removeDraftWidget,
     saveConfiguration,
   } = useDashboardStore();
-  const { fetchOrders } = useOrderStore();
   const navigate = useNavigate();
 
   const [settingsWidgetId, setSettingsWidgetId] = useState<string | null>(null);
@@ -34,17 +32,12 @@ export default function DashboardConfig() {
 
   useEffect(() => {
     initDraft();
-    fetchOrders();
-  }, [initDraft, fetchOrders]);
+  }, [initDraft]);
 
-  const handleSave = async () => {
-    try {
-      await saveConfiguration();
-      toast.success('Dashboard configuration saved successfully');
-      navigate('/dashboard');
-    } catch (error) {
-      toast.error('Failed to save dashboard configuration');
-    }
+  const handleSave = () => {
+    saveConfiguration();
+    toast.success('Dashboard configuration saved successfully');
+    navigate('/dashboard');
   };
 
   const handleConfirmDelete = () => {
