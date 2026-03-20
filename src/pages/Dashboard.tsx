@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Responsive } from 'react-grid-layout';
 import { Button } from '@/components/ui/button';
@@ -11,9 +12,14 @@ import { useContainerWidth } from '@/hooks/useContainerWidth';
 import { Settings2 } from 'lucide-react';
 
 export default function Dashboard() {
-  const { widgets, layouts, dateFilter, clearConfiguration } = useDashboardStore();
-  const orders = useOrderStore((s) => s.orders);
+  const { widgets, layouts, dateFilter, clearConfiguration, fetchConfiguration } = useDashboardStore();
+  const { orders, fetchOrders } = useOrderStore();
   const filteredOrders = filterOrdersByDate(orders, dateFilter);
+
+  useEffect(() => {
+    fetchConfiguration();
+    fetchOrders();
+  }, [fetchConfiguration, fetchOrders]);
 
   if (widgets.length === 0) {
     return <EmptyDashboard />;
