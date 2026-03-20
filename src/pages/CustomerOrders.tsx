@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Plus, PackageOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useOrderStore } from '@/stores/orderStore';
@@ -8,11 +8,7 @@ import DeleteOrderDialog from '@/components/features/orders/DeleteOrderDialog';
 import type { CustomerOrder } from '@/types/order';
 
 export default function CustomerOrders() {
-  const { orders, loading, fetchOrders, clearOrders } = useOrderStore();
-
-  useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+  const { orders, clearOrders } = useOrderStore();
   const [formOpen, setFormOpen] = useState(false);
   const [editingOrder, setEditingOrder] = useState<CustomerOrder | null>(null);
   const [deletingOrderId, setDeletingOrderId] = useState<string | null>(null);
